@@ -176,7 +176,7 @@ class AutopilotContact implements JsonSerializable
                 }
             } elseif ($key === 'lists') {
                 $this->lists = $value;
-            } else {
+            } elseif (!is_array($value)) {
                 $field = new AutopilotField($key, $value);
                 $this->fields[$field->getName()] = $field;
             }
@@ -200,11 +200,6 @@ class AutopilotContact implements JsonSerializable
 
         /** @var AutopilotField $field */
         foreach($this->fields as $field) {
-            //TODO: how do you "unset" fields with Autopilot? Their API doesn't say anything about it
-            if ($field->getValue() === null) {
-                continue;
-            }
-
             if (! $field->isReserved()) {
                 $result['custom'][$field->formatName()] = $field->getValue();
             } else {
