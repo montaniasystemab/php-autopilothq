@@ -236,7 +236,7 @@ class AutopilotField
         }
 
         // type of field is set in the constructor
-        if (($this->getType() !== $type) && !is_null($value)) {
+        if (($this->getType() !== $type) && !is_null($value) && !is_null($this->value)) {
             throw AutopilotException::typeMismatch($this->getType(), $type);
         }
 
