@@ -176,7 +176,7 @@ class AutopilotContact implements JsonSerializable
                 }
             } elseif ($key === 'lists') {
                 $this->lists = $value;
-            } elseif (!is_array($value)) {
+            } elseif (!is_array($value) && !is_null($value)) {
                 $field = new AutopilotField($key, $value);
                 $this->fields[$field->getName()] = $field;
             }
