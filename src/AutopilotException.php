@@ -253,12 +253,16 @@ class AutopilotException extends Exception
      *
      * @param      $expected
      * @param null $type
+     * @param      $currentValue
+     * @param      $setValue
+     * @param      $name
      *
      * @return static
      */
-    public static function typeMismatch($expected, $type = null)
+    public static function typeMismatch($expected, $type = null, $currentValue, $setValue, $name)
     {
-        return new static('Type value mismatch! Expected: ' . $expected . (is_null($type) ? '' : ', got: '. $type));
-    }
+        $message = 'Type value mismatch! Expected: ' . $expected . (is_null($type) ? '' : ', got: ' . $type) . ' - Current Value: ' . $currentValue . ', new value: ' . $setValue . ', key: ' . $name;
 
+        return new static($message);
+    }
 }
